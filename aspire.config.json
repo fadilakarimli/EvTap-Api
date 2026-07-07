@@ -1,0 +1,5 @@
+{
+    "appHost": {
+        "path": "src\\EvTap.AppHost\\EvTap.AppHost.csproj"
+    }
+}
