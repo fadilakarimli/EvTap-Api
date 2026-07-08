@@ -1,4 +1,5 @@
 using EvTap.Modules.Listings.Domain;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace EvTap.Modules.Listings.Persistence;
@@ -15,5 +16,12 @@ public sealed class ListingsDbContext(DbContextOptions<ListingsDbContext> option
     {
         modelBuilder.HasDefaultSchema("listings");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ListingsDbContext).Assembly);
+
+        // MassTransit transactional outbox tables (live in the listings schema alongside
+        // the aggregate they guard — the ListingApprovedEvent is written in the same
+        // transaction as the Status update).
+        modelBuilder.AddInboxStateEntity();
+        modelBuilder.AddOutboxMessageEntity();
+        modelBuilder.AddOutboxStateEntity();
     }
 }

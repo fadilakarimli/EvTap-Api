@@ -2,23 +2,23 @@
 
   <!--
     Every module references both Carter (whose Carter.Analyzers dependency pins Roslyn 4.8.0)
-    and Microsoft.EntityFrameworkCore.Design (which needs Roslyn 4.11.0) once it has its own
-    DbContext. Pinning these centrally avoids a repeated NU1107 version conflict in every module.
+    and Microsoft.EntityFrameworkCore.Design (which needs Roslyn 5.0.0 as of EF 10) once it has
+    its own DbContext. Pinning these centrally avoids a repeated NU1107 version conflict in every module.
   -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.11.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.11.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.11.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="5.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="5.0.0" />
     <!-- Transitive from Microsoft.CodeAnalysis.Workspaces.MSBuild; pinned to clear NU1903 advisories. -->
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.14.28" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.17" />
     <!--
-      Npgsql.EntityFrameworkCore.PostgreSQL depends on EFCore 9.0.1 while EFCore.Design (above)
-      needs 9.0.9; pin the runtime EFCore packages so every module resolves one consistent version.
+      Pin the runtime EFCore packages so every module resolves one consistent version
+      (EF Core 10 line — required by MassTransit.EntityFrameworkCore 8.5.x on net10.0).
     -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.9" />
   </ItemGroup>
 
 </Project>
