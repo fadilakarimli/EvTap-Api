@@ -28,6 +28,9 @@ builder.AddProject<Projects.EvTap_Api>("api")
     .WithReference(rabbitmq)
     .WaitFor(evtapDb)
     .WaitFor(redis)
-    .WaitFor(rabbitmq);
+    .WaitFor(rabbitmq)
+    // Fixed host port (instead of Aspire's default random port) so the frontend's API base URL
+    // doesn't need to change on every AppHost restart.
+    .WithHttpEndpoint(port: 5080, name: "http");
 
 builder.Build().Run();

@@ -105,6 +105,16 @@ try
 
     builder.Services.AddAuthorization();
 
+    const string FrontendCorsPolicy = "Frontend";
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(FrontendCorsPolicy, policy => policy
+            .WithOrigins("http://localhost:5173", "http://localhost:5174")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials());
+    });
+
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(options =>
     {
@@ -150,6 +160,8 @@ try
     app.UseSerilogRequestLogging();
 
     app.UseStaticFiles();
+
+    app.UseCors(FrontendCorsPolicy);
 
     app.UseAuthentication();
     app.UseAuthorization();
