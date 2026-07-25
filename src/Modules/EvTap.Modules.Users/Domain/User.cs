@@ -12,5 +12,7 @@ public sealed class User
 
     public UserRole Role { get; set; }
 
+    public bool IsEmailVerified { get; set; }
+
     public DateTimeOffset CreatedAt { get; init; }
 }

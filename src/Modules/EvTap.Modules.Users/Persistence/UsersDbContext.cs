@@ -7,6 +7,8 @@ public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options) : D
 {
     public DbSet<User> Users => Set<User>();
 
+    public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("users");

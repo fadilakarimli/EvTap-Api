@@ -1,3 +1,4 @@
+using EvTap.Shared.Email;
 using Microsoft.Extensions.Logging;
 
 namespace EvTap.Modules.Notifications.Email;

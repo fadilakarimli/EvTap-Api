@@ -1,5 +1,6 @@
 using EvTap.Modules.Notifications.Email;
 using EvTap.Modules.Notifications.Persistence;
+using EvTap.Shared.Email;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +21,15 @@ public static class NotificationsModule
 
         services.Configure<SmtpOptions>(configuration.GetSection(SmtpOptions.SectionName));
 
-        // Log-only sender in dev (no SMTP host configured); real MailKit sender otherwise.
+        // Real MailKit sender only when the SMTP credentials are fully filled in; otherwise a
+        // log-only sender (codes/emails show up in the API console) so nothing breaks in dev.
         var smtpHost = configuration[$"{SmtpOptions.SectionName}:Host"];
-        if (string.IsNullOrWhiteSpace(smtpHost))
+        var smtpUsername = configuration[$"{SmtpOptions.SectionName}:Username"];
+        var smtpPassword = configuration[$"{SmtpOptions.SectionName}:Password"];
+
+        if (string.IsNullOrWhiteSpace(smtpHost) ||
+            string.IsNullOrWhiteSpace(smtpUsername) ||
+            string.IsNullOrWhiteSpace(smtpPassword))
         {
             services.AddSingleton<IEmailSender, LogOnlyEmailSender>();
         }

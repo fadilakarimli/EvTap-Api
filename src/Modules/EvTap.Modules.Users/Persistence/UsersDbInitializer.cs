@@ -38,6 +38,7 @@ public static class UsersDbInitializer
             Email = adminEmail,
             PasswordHash = string.Empty,
             Role = UserRole.Admin,
+            IsEmailVerified = true,
             CreatedAt = DateTimeOffset.UtcNow,
         };
 

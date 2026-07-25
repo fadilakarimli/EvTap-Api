@@ -1,6 +1,8 @@
 using Carter;
 using EvTap.Modules.Listings;
 using EvTap.Modules.Listings.Persistence;
+using EvTap.Modules.Messaging;
+using EvTap.Modules.Messaging.Persistence;
 using EvTap.Modules.Notifications;
 using EvTap.Modules.Notifications.Consumers;
 using EvTap.Modules.Notifications.Persistence;
@@ -42,12 +44,14 @@ try
     builder.Services.AddListingsModule(builder.Configuration);
     builder.Services.AddSavedSearchesModule(builder.Configuration);
     builder.Services.AddNotificationsModule(builder.Configuration);
+    builder.Services.AddMessagingModule(builder.Configuration);
 
     builder.Services.AddSignalR();
 
     builder.Services.AddMassTransit(bus =>
     {
         bus.AddConsumer<ListingApprovedConsumer>();
+        bus.AddConsumer<MessageSentConsumer>();
 
         // Transactional outbox on the publishing side: ListingApprovedEvent rows are written
         // to listings-schema outbox tables in the same transaction as the Status update and
@@ -155,6 +159,7 @@ try
         await ListingsDbInitializer.MigrateAsync(app.Services);
         await SavedSearchesDbInitializer.MigrateAsync(app.Services);
         await NotificationsDbInitializer.MigrateAsync(app.Services);
+        await MessagingDbInitializer.MigrateAsync(app.Services);
     }
 
     app.UseSerilogRequestLogging();

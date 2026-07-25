@@ -104,6 +104,38 @@ namespace EvTap.Modules.Listings.Persistence.Migrations
                     b.ToTable("Listings", "listings");
                 });
 
+            modelBuilder.Entity("EvTap.Modules.Listings.Domain.ListingComment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AuthorName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId");
+
+                    b.ToTable("ListingComments", "listings");
+                });
+
             modelBuilder.Entity("EvTap.Modules.Listings.Domain.ListingImage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -294,6 +326,15 @@ namespace EvTap.Modules.Listings.Persistence.Migrations
                     b.HasIndex("Created");
 
                     b.ToTable("OutboxState", "listings");
+                });
+
+            modelBuilder.Entity("EvTap.Modules.Listings.Domain.ListingComment", b =>
+                {
+                    b.HasOne("EvTap.Modules.Listings.Domain.Listing", null)
+                        .WithMany()
+                        .HasForeignKey("ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EvTap.Modules.Listings.Domain.ListingImage", b =>

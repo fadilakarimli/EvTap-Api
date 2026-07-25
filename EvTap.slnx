@@ -6,6 +6,7 @@
     <Project Path="src/EvTap.Shared.Contracts/EvTap.Shared.Contracts.csproj" />
     <Project Path="src/EvTap.Shared/EvTap.Shared.csproj" />
     <Project Path="src/Modules/EvTap.Modules.Listings/EvTap.Modules.Listings.csproj" />
+    <Project Path="src/Modules/EvTap.Modules.Messaging/EvTap.Modules.Messaging.csproj" />
     <Project Path="src/Modules/EvTap.Modules.Notifications/EvTap.Modules.Notifications.csproj" />
     <Project Path="src/Modules/EvTap.Modules.SavedSearches/EvTap.Modules.SavedSearches.csproj" />
     <Project Path="src/Modules/EvTap.Modules.Users/EvTap.Modules.Users.csproj" />

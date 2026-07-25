@@ -8,5 +8,6 @@ public sealed record GetMyNotificationsQuery(Guid UserId) : IRequest<Result<IRea
 public sealed record NotificationResponse(
     Guid Id,
     Guid ListingId,
+    string ListingTitle,
     string Channel,
     DateTimeOffset SentAt);

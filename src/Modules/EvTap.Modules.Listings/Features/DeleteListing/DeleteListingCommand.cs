@@ -3,4 +3,4 @@ using MediatR;
 
 namespace EvTap.Modules.Listings.Features.DeleteListing;
 
-public sealed record DeleteListingCommand(Guid Id, Guid RequestingUserId) : IRequest<Result>;
+public sealed record DeleteListingCommand(Guid Id, Guid RequestingUserId, bool IsAdmin) : IRequest<Result>;

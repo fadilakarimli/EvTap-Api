@@ -31,6 +31,13 @@ internal sealed class LoginHandler(
             return Result.Failure<LoginResponse>(Error.Unauthorized("Users.InvalidCredentials", "Invalid email or password."));
         }
 
+        if (!user.IsEmailVerified)
+        {
+            return Result.Failure<LoginResponse>(Error.Unauthorized(
+                "Users.EmailNotVerified",
+                "Email hələ təsdiqlənməyib — emailinizə göndərilən 6 rəqəmli kodu daxil edin."));
+        }
+
         var token = tokenGenerator.GenerateToken(user);
         var expiresAtUtc = DateTime.UtcNow.AddMinutes(jwtOptions.Value.ExpirationMinutes);
 

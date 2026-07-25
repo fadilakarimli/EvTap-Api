@@ -14,7 +14,8 @@ public sealed class DeleteListingEndpoint : ICarterModule
     {
         app.MapDelete("/api/listings/{id:guid}", async (Guid id, HttpContext context, ISender sender) =>
         {
-            var result = await sender.Send(new DeleteListingCommand(id, context.User.GetUserId()));
+            var result = await sender.Send(
+                new DeleteListingCommand(id, context.User.GetUserId(), context.User.IsAdmin()));
 
             return result.ToHttpResult();
         }).RequireAuthorization();

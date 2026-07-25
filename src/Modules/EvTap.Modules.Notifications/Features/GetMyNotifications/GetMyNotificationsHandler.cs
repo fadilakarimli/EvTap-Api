@@ -18,6 +18,7 @@ internal sealed class GetMyNotificationsHandler(NotificationsDbContext dbContext
             .Select(n => new NotificationResponse(
                 n.Id,
                 n.ListingId,
+                n.ListingTitle,
                 n.Channel.ToString(),
                 n.SentAt))
             .AsNoTracking()

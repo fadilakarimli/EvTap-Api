@@ -12,6 +12,9 @@ internal sealed class NotificationConfiguration : IEntityTypeConfiguration<Notif
 
         builder.HasKey(n => n.Id);
 
+        builder.Property(n => n.RecipientEmail).HasMaxLength(320).IsRequired();
+        builder.Property(n => n.ListingTitle).HasMaxLength(200).IsRequired();
+
         builder.Property(n => n.Channel)
             .HasConversion<string>()
             .HasMaxLength(20)

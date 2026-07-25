@@ -25,6 +25,9 @@ internal sealed class GetListingByIdHandler(ListingsDbContext dbContext)
         listing.ViewCount++;
         await dbContext.SaveChangesAsync(cancellationToken);
 
+        var isFavorited = request.UserId.HasValue && await dbContext.Favorites
+            .AnyAsync(f => f.UserId == request.UserId.Value && f.ListingId == listing.Id, cancellationToken);
+
         var response = new ListingDetailResponse(
             listing.Id,
             listing.Title,
@@ -40,7 +43,8 @@ internal sealed class GetListingByIdHandler(ListingsDbContext dbContext)
             listing.OwnerId,
             listing.CreatedAt,
             listing.ViewCount,
-            listing.Images.OrderBy(i => i.Order).Select(i => i.Url).ToList());
+            listing.Images.OrderBy(i => i.Order).Select(i => i.Url).ToList(),
+            isFavorited);
 
         return Result.Success(response);
     }

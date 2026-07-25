@@ -22,6 +22,7 @@ public static class UsersModule
 
         services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
         services.AddSingleton<TokenGenerator>();
+        services.AddScoped<OtpService>();
 
         services.AddOptions<JwtOptions>()
             .Bind(configuration.GetSection(JwtOptions.SectionName))

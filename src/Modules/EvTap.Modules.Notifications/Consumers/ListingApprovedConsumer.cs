@@ -1,8 +1,8 @@
 using EvTap.Modules.Notifications.Domain;
-using EvTap.Modules.Notifications.Email;
 using EvTap.Modules.Notifications.Persistence;
 using EvTap.Modules.Notifications.Realtime;
 using EvTap.Shared.Contracts;
+using EvTap.Shared.Email;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
@@ -79,6 +79,8 @@ public sealed class ListingApprovedConsumer(
 
         foreach (var userId in usersToNotify)
         {
+            var recipientEmail = emails.GetValueOrDefault(userId, "unknown@evtap.local");
+
             if (emails.TryGetValue(userId, out var email))
             {
                 await emailSender.SendAsync(email, subject, body, cancellationToken);
@@ -87,7 +89,9 @@ public sealed class ListingApprovedConsumer(
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
+                    RecipientEmail = recipientEmail,
                     ListingId = message.ListingId,
+                    ListingTitle = message.Title,
                     Channel = NotificationChannel.Email,
                     SentAt = sentAt,
                 });
@@ -109,7 +113,9 @@ public sealed class ListingApprovedConsumer(
             {
                 Id = Guid.NewGuid(),
                 UserId = userId,
+                RecipientEmail = recipientEmail,
                 ListingId = message.ListingId,
+                ListingTitle = message.Title,
                 Channel = NotificationChannel.SignalR,
                 SentAt = sentAt,
             });

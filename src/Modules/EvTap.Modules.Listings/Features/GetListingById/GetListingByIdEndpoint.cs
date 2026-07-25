@@ -1,5 +1,6 @@
 using Carter;
 using EvTap.Shared.Endpoints;
+using EvTap.Shared.Security;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +12,9 @@ public sealed class GetListingByIdEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/listings/{id:guid}", async (Guid id, ISender sender) =>
+        app.MapGet("/api/listings/{id:guid}", async (Guid id, HttpContext context, ISender sender) =>
         {
-            var result = await sender.Send(new GetListingByIdQuery(id));
+            var result = await sender.Send(new GetListingByIdQuery(id, context.User.TryGetUserId()));
 
             return result.ToHttpResult();
         });

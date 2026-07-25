@@ -17,7 +17,7 @@ internal sealed class DeleteListingHandler(ListingsDbContext dbContext)
             return Result.Failure(Error.NotFound("Listings.NotFound", "Listing not found."));
         }
 
-        if (listing.OwnerId != request.RequestingUserId)
+        if (listing.OwnerId != request.RequestingUserId && !request.IsAdmin)
         {
             return Result.Failure(Error.Forbidden("Listings.NotOwner", "You do not own this listing."));
         }

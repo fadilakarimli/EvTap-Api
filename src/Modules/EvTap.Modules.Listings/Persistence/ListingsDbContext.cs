@@ -12,6 +12,8 @@ public sealed class ListingsDbContext(DbContextOptions<ListingsDbContext> option
 
     public DbSet<Favorite> Favorites => Set<Favorite>();
 
+    public DbSet<ListingComment> ListingComments => Set<ListingComment>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("listings");

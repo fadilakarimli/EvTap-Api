@@ -3,7 +3,7 @@ using MediatR;
 
 namespace EvTap.Modules.Listings.Features.GetListingById;
 
-public sealed record GetListingByIdQuery(Guid Id) : IRequest<Result<ListingDetailResponse>>;
+public sealed record GetListingByIdQuery(Guid Id, Guid? UserId) : IRequest<Result<ListingDetailResponse>>;
 
 public sealed record ListingDetailResponse(
     Guid Id,
@@ -20,4 +20,5 @@ public sealed record ListingDetailResponse(
     Guid OwnerId,
     DateTimeOffset CreatedAt,
     int ViewCount,
-    IReadOnlyList<string> ImageUrls);
+    IReadOnlyList<string> ImageUrls,
+    bool IsFavorited);
