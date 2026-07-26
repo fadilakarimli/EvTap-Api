@@ -5,6 +5,7 @@
     <Project Path="src/EvTap.ServiceDefaults/EvTap.ServiceDefaults.csproj" />
     <Project Path="src/EvTap.Shared.Contracts/EvTap.Shared.Contracts.csproj" />
     <Project Path="src/EvTap.Shared/EvTap.Shared.csproj" />
+    <Project Path="src/Modules/EvTap.Modules.Bookings/EvTap.Modules.Bookings.csproj" />
     <Project Path="src/Modules/EvTap.Modules.Listings/EvTap.Modules.Listings.csproj" />
     <Project Path="src/Modules/EvTap.Modules.Messaging/EvTap.Modules.Messaging.csproj" />
     <Project Path="src/Modules/EvTap.Modules.Notifications/EvTap.Modules.Notifications.csproj" />

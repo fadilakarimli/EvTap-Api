@@ -10,6 +10,14 @@ public sealed class Listing
 
     public decimal Price { get; set; }
 
+    /// <summary>Optional short-term rental rate, set by the owner. Null means the listing
+    /// cannot be booked hourly via PayPal (see EvTap.Modules.Bookings).</summary>
+    public decimal? PricePerHour { get; set; }
+
+    /// <summary>Optional short-term rental rate, set by the owner. Null means the listing
+    /// cannot be booked nightly via PayPal (see EvTap.Modules.Bookings).</summary>
+    public decimal? PricePerNight { get; set; }
+
     public int Rooms { get; set; }
 
     public double AreaSquareMeters { get; set; }

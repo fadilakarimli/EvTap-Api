@@ -9,6 +9,7 @@
     <ProjectReference Include="..\Modules\EvTap.Modules.SavedSearches\EvTap.Modules.SavedSearches.csproj" />
     <ProjectReference Include="..\Modules\EvTap.Modules.Notifications\EvTap.Modules.Notifications.csproj" />
     <ProjectReference Include="..\Modules\EvTap.Modules.Messaging\EvTap.Modules.Messaging.csproj" />
+    <ProjectReference Include="..\Modules\EvTap.Modules.Bookings\EvTap.Modules.Bookings.csproj" />
   </ItemGroup>
 
   <ItemGroup>

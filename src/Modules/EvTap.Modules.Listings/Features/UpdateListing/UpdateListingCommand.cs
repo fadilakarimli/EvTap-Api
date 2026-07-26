@@ -8,6 +8,8 @@ public sealed record UpdateListingCommand(
     string Title,
     string Description,
     decimal Price,
+    decimal? PricePerHour,
+    decimal? PricePerNight,
     int Rooms,
     double AreaSquareMeters,
     string District,

@@ -10,6 +10,8 @@ public sealed record ListingDetailResponse(
     string Title,
     string Description,
     decimal Price,
+    decimal? PricePerHour,
+    decimal? PricePerNight,
     int Rooms,
     double AreaSquareMeters,
     string District,

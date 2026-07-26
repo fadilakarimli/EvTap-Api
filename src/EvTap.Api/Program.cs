@@ -1,4 +1,6 @@
 using Carter;
+using EvTap.Modules.Bookings;
+using EvTap.Modules.Bookings.Persistence;
 using EvTap.Modules.Listings;
 using EvTap.Modules.Listings.Persistence;
 using EvTap.Modules.Messaging;
@@ -45,6 +47,7 @@ try
     builder.Services.AddSavedSearchesModule(builder.Configuration);
     builder.Services.AddNotificationsModule(builder.Configuration);
     builder.Services.AddMessagingModule(builder.Configuration);
+    builder.Services.AddBookingsModule(builder.Configuration);
 
     builder.Services.AddSignalR();
 
@@ -52,6 +55,7 @@ try
     {
         bus.AddConsumer<ListingApprovedConsumer>();
         bus.AddConsumer<MessageSentConsumer>();
+        bus.AddConsumer<PaymentCompletedConsumer>();
 
         // Transactional outbox on the publishing side: ListingApprovedEvent rows are written
         // to listings-schema outbox tables in the same transaction as the Status update and
@@ -160,6 +164,7 @@ try
         await SavedSearchesDbInitializer.MigrateAsync(app.Services);
         await NotificationsDbInitializer.MigrateAsync(app.Services);
         await MessagingDbInitializer.MigrateAsync(app.Services);
+        await BookingsDbInitializer.MigrateAsync(app.Services);
     }
 
     app.UseSerilogRequestLogging();

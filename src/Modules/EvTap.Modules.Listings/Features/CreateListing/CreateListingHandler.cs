@@ -16,6 +16,8 @@ internal sealed class CreateListingHandler(ListingsDbContext dbContext)
             Title = request.Title,
             Description = request.Description,
             Price = request.Price,
+            PricePerHour = request.PricePerHour,
+            PricePerNight = request.PricePerNight,
             Rooms = request.Rooms,
             AreaSquareMeters = request.AreaSquareMeters,
             District = request.District,

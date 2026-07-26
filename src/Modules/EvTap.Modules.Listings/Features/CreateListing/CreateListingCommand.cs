@@ -7,6 +7,8 @@ public sealed record CreateListingCommand(
     string Title,
     string Description,
     decimal Price,
+    decimal? PricePerHour,
+    decimal? PricePerNight,
     int Rooms,
     double AreaSquareMeters,
     string District,

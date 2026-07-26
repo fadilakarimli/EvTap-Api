@@ -24,6 +24,8 @@ internal sealed class UpdateListingHandler(ListingsDbContext dbContext)
         listing.Title = request.Title;
         listing.Description = request.Description;
         listing.Price = request.Price;
+        listing.PricePerHour = request.PricePerHour;
+        listing.PricePerNight = request.PricePerNight;
         listing.Rooms = request.Rooms;
         listing.AreaSquareMeters = request.AreaSquareMeters;
         listing.District = request.District;

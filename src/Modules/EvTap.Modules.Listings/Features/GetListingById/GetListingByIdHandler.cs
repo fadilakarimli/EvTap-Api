@@ -33,6 +33,8 @@ internal sealed class GetListingByIdHandler(ListingsDbContext dbContext)
             listing.Title,
             listing.Description,
             listing.Price,
+            listing.PricePerHour,
+            listing.PricePerNight,
             listing.Rooms,
             listing.AreaSquareMeters,
             listing.District,

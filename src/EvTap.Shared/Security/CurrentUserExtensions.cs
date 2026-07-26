@@ -15,6 +15,10 @@ public static class CurrentUserExtensions
     public static string GetUserName(this ClaimsPrincipal user) =>
         user.FindFirst(ClaimTypes.Name)?.Value ?? "İstifadəçi";
 
+    public static string GetUserEmail(this ClaimsPrincipal user) =>
+        user.FindFirst(ClaimTypes.Email)?.Value
+            ?? throw new InvalidOperationException("User email claim not found on the current principal.");
+
     public static Guid? TryGetUserId(this ClaimsPrincipal user)
     {
         var id = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;

@@ -15,6 +15,8 @@ internal sealed class ListingConfiguration : IEntityTypeConfiguration<Listing>
         builder.Property(l => l.Title).HasMaxLength(200).IsRequired();
         builder.Property(l => l.Description).IsRequired();
         builder.Property(l => l.Price).HasColumnType("numeric(12,2)");
+        builder.Property(l => l.PricePerHour).HasColumnType("numeric(12,2)");
+        builder.Property(l => l.PricePerNight).HasColumnType("numeric(12,2)");
         builder.Property(l => l.District).HasMaxLength(100).IsRequired();
         builder.Property(l => l.Address).HasMaxLength(300).IsRequired();
 

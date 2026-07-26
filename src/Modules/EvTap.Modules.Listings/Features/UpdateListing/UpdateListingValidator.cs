@@ -9,6 +9,8 @@ internal sealed class UpdateListingValidator : AbstractValidator<UpdateListingCo
         RuleFor(x => x.Title).NotEmpty().MaximumLength(200);
         RuleFor(x => x.Description).NotEmpty();
         RuleFor(x => x.Price).GreaterThan(0);
+        RuleFor(x => x.PricePerHour).GreaterThan(0).When(x => x.PricePerHour.HasValue);
+        RuleFor(x => x.PricePerNight).GreaterThan(0).When(x => x.PricePerNight.HasValue);
         RuleFor(x => x.Rooms).GreaterThan(0);
         RuleFor(x => x.AreaSquareMeters).GreaterThan(0);
         RuleFor(x => x.District).NotEmpty().MaximumLength(100);
